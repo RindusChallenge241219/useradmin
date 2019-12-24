@@ -37,6 +37,33 @@ public class App {
                 return;
             }
             out.println("You are now logged in. Welcome " + login + ".");
+
+            int selection;
+            do {
+                selection = promptMainMenu(scanner);
+                // TODO: process selection
+            } while (selection != 0);
         }
+    }
+
+    /**
+     * Prompt main menu. An integer is return for each option:
+     * <ul>
+     * <li>1 to create an user
+     * <li>2 to list users
+     * <li>3 to update users
+     * <li>4 to delete users
+     * <li>0 to exit
+     * </ul>
+     */
+    private static int promptMainMenu(final Scanner scanner) {
+        out.print("\nPlease select an option:\n"
+                + "(1) Create an user\n"
+                + "(2) List users\n"
+                + "(3) Update users\n"
+                + "(4) Delete users\n"
+                + "(0) Exit\n");
+
+        return Integer.parseInt(scanner.nextLine());
     }
 }
