@@ -50,6 +50,8 @@ public class App {
                     createUserMenu(scanner, crud);
                 } else if (selection == 2) {
                     listUsers(crud);
+                } else if (selection == 3) {
+                    updateUser(scanner, crud);
                 } else if (selection == 4) {
                     deleteUser(scanner, crud);
                 }
@@ -127,5 +129,32 @@ public class App {
         out.print("  Enter user id: ");
         final int userId = Integer.parseInt(scanner.nextLine());
         crud.deleteUser(userId);
+    }
+
+    private static void updateUser(final Scanner scanner, final Crud crud) {
+
+        out.print("  Enter user id of the user to change: ");
+        final int userId = Integer.parseInt(scanner.nextLine());
+
+        // Prompt first name
+        out.print("  Please enter first name: ");
+        final String firstName = scanner.nextLine();
+        // Validate first name
+        if (firstName.isEmpty()) {
+            out.println("Error: first name cannot be empty string");
+            return;
+        }
+
+        // Prompt last name
+        out.print("  Please enter last name: ");
+        final String lastName = scanner.nextLine();
+
+        // Validate last name
+        if (lastName.isEmpty()) {
+            out.println("Error: last name cannot be empty string");
+            return;
+        }
+
+        crud.updateUser(userId, firstName, lastName);
     }
 }

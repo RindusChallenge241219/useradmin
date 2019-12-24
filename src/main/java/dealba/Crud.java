@@ -124,4 +124,25 @@ public class Crud {
             transaction.commit();
         }
     }
+
+    /**
+     * Update an user in the database by changing its first and last names. This operation
+     * is restricted to the administrator who created the user.
+     *
+     * @param id        User id, used to find the user to be deleted.
+     * @param firstName New first name.
+     * @param lastName  New last name.
+     */
+    public void updateUser(final int id, final String firstName, final String lastName) {
+
+        UserInfo user = session.get(UserInfo.class, id);
+        if (user != null && currentAdmin.equals(user.getAdministrator())) {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+
+            session.beginTransaction();
+            session.saveOrUpdate(user);
+            session.getTransaction().commit();
+        }
+    }
 }
