@@ -1,5 +1,6 @@
 package dealba;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
@@ -92,5 +94,17 @@ public class Crud {
         transaction.commit();
 
         return userInfo;
+    }
+
+    /**
+     * List all the users in the database.
+     *
+     * @return list of users.
+     */
+    public List<UserInfo> listUsers() {
+        Transaction transaction = session.beginTransaction();
+        Query<UserInfo> users = session.createQuery("from UserInfo", UserInfo.class);
+        transaction.commit();
+        return users.list();
     }
 }

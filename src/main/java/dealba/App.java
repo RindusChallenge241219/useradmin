@@ -2,8 +2,11 @@ package dealba;
 
 import static java.lang.System.out;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+import de.vandermeer.asciitable.AsciiTable;
 import dealba.model.UserInfo;
 
 public class App {
@@ -45,6 +48,8 @@ public class App {
                 selection = promptMainMenu(scanner);
                 if (selection == 1) {
                     createUserMenu(scanner, crud);
+                } else if (selection == 2) {
+                    listUsers(crud);
                 }
             } while (selection != 0);
         }
@@ -97,5 +102,22 @@ public class App {
         final UserInfo newUser = crud.createUser(firstName, lastName);        
         out.println("Creating user:");
         out.println(newUser);
+    }
+
+    private static void listUsers(final Crud crud) {
+
+        List<UserInfo> users = crud.listUsers();
+
+        AsciiTable table = new AsciiTable();
+        table.addRule();
+        table.addRow(Arrays.asList("ID", "First name", "Last name"));
+        table.addRule();
+
+        users.forEach(user -> {
+            table.addRow(Integer.toString(user.getId()), user.getFirstName(), user.getLastName());
+            table.addRule();
+        });
+
+        out.println(table.render());
     }
 }
