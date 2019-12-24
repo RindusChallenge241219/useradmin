@@ -19,3 +19,6 @@ useradmin.iml
 .settings
 .project
 .classpath
+
+# Mac
+.DS_Store
