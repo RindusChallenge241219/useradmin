@@ -107,4 +107,21 @@ public class Crud {
         transaction.commit();
         return users.list();
     }
+
+    /**
+     * Delete an user in the database. This operation is restricted to the administrator
+     * who created the user.
+     *
+     * @param id User id, used to find the user to be deleted.
+     */
+    public void deleteUser(int id) {
+
+        UserInfo user = session.get(UserInfo.class, id);
+        if (user != null && currentAdmin.equals(user.getAdministrator())) {
+            Transaction transaction = session.beginTransaction();
+            user.getAccount().forEach(session::delete);
+            session.delete(user);
+            transaction.commit();
+        }
+    }
 }

@@ -50,6 +50,8 @@ public class App {
                     createUserMenu(scanner, crud);
                 } else if (selection == 2) {
                     listUsers(crud);
+                } else if (selection == 4) {
+                    deleteUser(scanner, crud);
                 }
             } while (selection != 0);
         }
@@ -119,5 +121,11 @@ public class App {
         });
 
         out.println(table.render());
+    }
+
+    private static void deleteUser(final Scanner scanner, final Crud crud) {
+        out.print("  Enter user id: ");
+        final int userId = Integer.parseInt(scanner.nextLine());
+        crud.deleteUser(userId);
     }
 }
