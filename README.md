@@ -1,4 +1,4 @@
-# useradmin
+# useradmin [![Build Status](https://travis-ci.org/RindusChallenge241219/useradmin.svg?branch=master)](https://travis-ci.org/RindusChallenge241219/useradmin)
 Code challenge for Rindus: User administration
 
 Small console application (CRUD) to manage users and their bank account data (IBAN). Required fields are first name, last name and IBAN. Users may have multiple accounts. Entered data must be validated.
