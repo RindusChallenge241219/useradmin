@@ -9,6 +9,8 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.iban4j.CountryCode;
+import org.iban4j.Iban;
 
 import dealba.model.Account;
 import dealba.model.Administrator;
@@ -65,5 +67,30 @@ public class Crud {
         }
 
         return admin;
+    }
+
+    /**
+     * Create an UserInfo instance in the database. This instance is marked as
+     * created by the current administrator and assigned a Spanish bank account
+     * with balance 0.
+     *
+     * @param firstName User's first name.
+     * @param lastName  User's last name.
+     * @return created UserInfo
+     */
+    public UserInfo createUser(final String firstName, final String lastName) {
+
+        UserInfo userInfo = new UserInfo(0, firstName, lastName, currentAdmin);
+
+        // Create an account for the new user
+        Account account = new Account(Iban.random(CountryCode.ES).toFormattedString());
+        userInfo.getAccount().add(account);
+
+        Transaction transaction = session.beginTransaction();
+        session.save(account);
+        session.save(userInfo);
+        transaction.commit();
+
+        return userInfo;
     }
 }

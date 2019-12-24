@@ -4,6 +4,8 @@ import static java.lang.System.out;
 
 import java.util.Scanner;
 
+import dealba.model.UserInfo;
+
 public class App {
 
     public static void main(final String[] args) {
@@ -41,7 +43,9 @@ public class App {
             int selection;
             do {
                 selection = promptMainMenu(scanner);
-                // TODO: process selection
+                if (selection == 1) {
+                    createUserMenu(scanner, crud);
+                }
             } while (selection != 0);
         }
     }
@@ -65,5 +69,33 @@ public class App {
                 + "(0) Exit\n");
 
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static void createUserMenu(final Scanner scanner, final Crud crud) {
+        out.println("Creating an user:");
+
+        // Prompt first name
+        out.print("  Please enter first name: ");
+        final String firstName = scanner.nextLine();
+
+        // Validate first name
+        if (firstName.isEmpty()) {
+            out.println("Error: first name cannot be empty string");
+            return;
+        }
+
+        // Prompt last name
+        out.print("  Please enter last name: ");
+        final String lastName = scanner.nextLine();
+
+        // Validate last name
+        if (lastName.isEmpty()) {
+            out.println("Error: last name cannot be empty string");
+            return;
+        }
+
+        final UserInfo newUser = crud.createUser(firstName, lastName);        
+        out.println("Creating user:");
+        out.println(newUser);
     }
 }
