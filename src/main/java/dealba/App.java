@@ -8,12 +8,14 @@ import java.util.Scanner;
 
 import de.vandermeer.asciitable.AsciiTable;
 import dealba.model.UserInfo;
+import dealba.validation.LoginValidator;
 import dealba.validation.NameValidator;
 import dealba.validation.Validator;
 
 public class App {
 
-    private static Validator nameValidator = new NameValidator();
+    private static final Validator nameValidator = new NameValidator();
+    private static final Validator loginValidator = new LoginValidator();
 
     public static void main(final String[] args) {
 
@@ -24,10 +26,9 @@ public class App {
 
         try (Scanner scanner = new Scanner(System.in)) {
             out.print("  Enter login: ");
-            login = scanner.nextLine().toLowerCase();
-
-            if (login.isEmpty()) {
-                out.println("Error: login cannot be empty string");
+            login = scanner.nextLine();
+            if (!loginValidator.validate(login)) {
+                out.println("Error. " + loginValidator.giveHint());
                 return;
             }
 
