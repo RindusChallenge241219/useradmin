@@ -114,11 +114,12 @@ public class App {
 
         AsciiTable table = new AsciiTable();
         table.addRule();
-        table.addRow(Arrays.asList("ID", "First name", "Last name"));
+        table.addRow(Arrays.asList("ID", "First name", "Last name", "Administrator"));
         table.addRule();
 
         users.forEach(user -> {
-            table.addRow(Integer.toString(user.getId()), user.getFirstName(), user.getLastName());
+            table.addRow(Integer.toString(user.getId()), user.getFirstName(),
+                user.getLastName(), user.getAdministrator().getLogin());
             table.addRule();
         });
 
