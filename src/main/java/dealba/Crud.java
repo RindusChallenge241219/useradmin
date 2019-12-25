@@ -103,7 +103,7 @@ public class Crud {
      */
     public List<UserInfo> listUsers() {
         Transaction transaction = session.beginTransaction();
-        Query<UserInfo> users = session.createQuery("from UserInfo", UserInfo.class);
+        Query<UserInfo> users = session.createQuery("from UserInfo u ORDER by u.id", UserInfo.class);
         transaction.commit();
         return users.list();
     }
