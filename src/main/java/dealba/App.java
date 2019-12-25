@@ -10,12 +10,14 @@ import de.vandermeer.asciitable.AsciiTable;
 import dealba.model.UserInfo;
 import dealba.validation.LoginValidator;
 import dealba.validation.NameValidator;
+import dealba.validation.PasswordValidator;
 import dealba.validation.Validator;
 
 public class App {
 
     private static final Validator nameValidator = new NameValidator();
     private static final Validator loginValidator = new LoginValidator();
+    private static final Validator passwordValidator = new PasswordValidator();
 
     public static void main(final String[] args) {
 
@@ -34,8 +36,8 @@ public class App {
 
             out.print("  Enter password: ");
             password = scanner.nextLine();
-            if (password.isEmpty()) {
-                out.println("Error: password cannot be empty string");
+            if (!passwordValidator.validate(password)) {
+                out.println("Error. " + passwordValidator.giveHint());
                 return;
             }
 
