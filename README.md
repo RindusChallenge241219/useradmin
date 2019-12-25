@@ -16,6 +16,10 @@ Administrators should be able to create, list, update and delete users via conso
 - User/password: postgres/postgres
 - Database: useradmin
 
+## How to build and execute
+First, please make sure to meet the software requirements listed and configure a Postgres database as described. The app can be build with the Maven goal *package* `mvn package` from the root directory. This goal creates a jar with dependencies in the target directory named: *useradmin<version>-jar-with-dependencies.jar*. The app can be executed from this jar then:
+`java -jar useradmin<version>-jar-with-dependencies.jar`.
+
 ## Data model
 The data model is comprised of three objects: User, Account and Administrator.
 
