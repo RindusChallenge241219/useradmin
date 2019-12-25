@@ -8,8 +8,12 @@ import java.util.Scanner;
 
 import de.vandermeer.asciitable.AsciiTable;
 import dealba.model.UserInfo;
+import dealba.validation.NameValidator;
+import dealba.validation.Validator;
 
 public class App {
+
+    private static Validator nameValidator = new NameValidator();
 
     public static void main(final String[] args) {
 
@@ -88,8 +92,8 @@ public class App {
         final String firstName = scanner.nextLine();
 
         // Validate first name
-        if (firstName.isEmpty()) {
-            out.println("Error: first name cannot be empty string");
+        if (!nameValidator.validate(firstName)) {
+            out.println("Error. " + nameValidator.giveHint());
             return;
         }
 
@@ -98,8 +102,8 @@ public class App {
         final String lastName = scanner.nextLine();
 
         // Validate last name
-        if (lastName.isEmpty()) {
-            out.println("Error: last name cannot be empty string");
+        if (!nameValidator.validate(lastName)) {
+            out.println("Error. " + nameValidator.validate(lastName));
             return;
         }
 
@@ -141,8 +145,8 @@ public class App {
         out.print("  Please enter first name: ");
         final String firstName = scanner.nextLine();
         // Validate first name
-        if (firstName.isEmpty()) {
-            out.println("Error: first name cannot be empty string");
+        if (!nameValidator.validate(firstName)) {
+            out.println("Error. " + nameValidator.giveHint());
             return;
         }
 
@@ -151,8 +155,8 @@ public class App {
         final String lastName = scanner.nextLine();
 
         // Validate last name
-        if (lastName.isEmpty()) {
-            out.println("Error: last name cannot be empty string");
+        if (!nameValidator.validate(lastName)) {
+            out.println("Error. " + nameValidator.giveHint());
             return;
         }
 
